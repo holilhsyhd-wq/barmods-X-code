@@ -1,11 +1,34 @@
 {
   "version": 2,
   "builds": [
-    { "src": "server.js", "use": "@vercel/node" },
-    { "src": "client/package.json", "use": "@vercel/static-build" }
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "client/dist" }
+    }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/server.js" },
-    { "src": "/(.*)", "dest": "/client/$1" }
-  ]
+    {
+      "src": "/api/(.*)",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/client/dist/$1"
+    }
+  ],
+  "env": {
+    "PTERO_DOMAIN": "@ptero_domain",
+    "PTERO_KEY": "@ptero_key",
+    "PTERO_EGG": "@ptero_egg",
+    "PTERO_LOCATION": "@ptero_location",
+    "PTERO_CPU": "@ptero_cpu",
+    "PTERO_DISK": "@ptero_disk",
+    "ADMIN_USER": "@admin_user",
+    "ADMIN_PASS": "@admin_pass"
+  }
 }
